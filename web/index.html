@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetPulse</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5b8bb5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="6"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+                <span>NetPulse</span>
+                <span style="font-size: 11px; color: var(--text-muted); margin-left: 8px; font-weight: 400;">Created by Wyrchik</span>
+            </div>
+            
+            <div class="controls-stack">
+                <div class="controls">
+                    <input type="text" id="start-ip" class="target-input half" placeholder="192.168.1.1" value="192.168.1.1" title="Start IP address">
+                    <span class="to-text">to</span>
+                    <input type="text" id="end-ip" class="target-input half" placeholder="192.168.1.255" value="192.168.1.255" title="End IP address">
+                    <button id="scan-btn" class="btn btn-scan">
+                        <svg class="spinner hidden" id="scan-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="4.93" x2="19.07" y2="7.76"></line></svg>
+                        <span id="scan-btn-text">SCAN</span>
+                    </button>
+                    <button id="stop-btn" class="btn btn-secondary">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12"></rect></svg>
+                        STOP
+                    </button>
+                </div>
+                <div class="controls-secondary">
+                    <label>Ports:</label>
+                    <input type="text" id="ports-input" value="22,80,443" class="secondary-input" style="width: 140px;">
+                    <label>Intensity:</label>
+                    <input type="range" id="speed-input" min="10" max="1000" value="200" style="width: 100px;">
+                    <span id="speed-display" style="font-size: 12px; color: var(--text-main);">200</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="filter-online"> Show only Online
+                </label>
+            </div>
+            <div class="toolbar-right">
+                <button id="delete-offline-btn" class="btn-tools btn-delete-all">🗑 Delete All Offline</button>
+                <button id="export-csv-btn" class="btn-tools">⬇ Export (CSV)</button>
+            </div>
+        </div>
+
+        <!-- Main Panel -->
+        <div class="main-panel">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="80" class="sortable" data-sort="status">Status <span class="sort-icon"></span></th>
+                            <th width="120">Device Name</th>
+                            <th width="120" class="sortable" data-sort="ip">IP Address <span class="sort-icon"></span></th>
+                            <th width="100">OS</th>
+                            <th width="80">Latency</th>
+                            <th width="140">MAC Address</th>
+                            <th width="140">Manufacturer</th>
+                            <th>Ports & Services</th>
+                            <th width="100">Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <footer class="bottom-bar">
+            <span id="found-text">Found: 0 Devices</span> <span class="sep">|</span> 
+            <span id="speed-text">Scan speed: 0 IPs/s</span> <span class="sep">|</span> 
+            <span class="progress-wrapper">Progress: <span class="progress-track"><span id="progress-fill" class="progress-fill"></span></span> <span id="progress-percent">0%</span></span>
+        </footer>
+    </div>
+    
+    <!-- Brute Force Modal -->
+    <div id="bf-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Brute-Force Attack</h3>
+                <button id="bf-close" class="close-btn">&times;</button>
+            </div>
+            <div style="background-color: rgba(255, 82, 82, 0.1); color: var(--red); padding: 8px 15px; font-size: 12px; text-align: center; border-bottom: 1px solid rgba(255, 82, 82, 0.2);">
+                ⚠️ Warning: This feature is experimental and currently unstable (Beta)
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <label>Target:</label>
+                    <input type="text" id="bf-ip" readonly>
+                </div>
+                <div class="form-row">
+                    <label>Port:</label>
+                    <input type="number" id="bf-port" value="22">
+                </div>
+                <div class="form-row">
+                    <label>Username:</label>
+                    <input type="text" id="bf-user" value="root">
+                </div>
+                <div class="form-row">
+                    <label>Delay (ms):</label>
+                    <input type="number" id="bf-delay" value="100" title="Time to wait between attempts">
+                </div>
+                <div class="form-row">
+                    <button id="bf-start-btn" class="btn btn-scan" style="width:100%">Start Attack</button>
+                </div>
+                <div class="terminal" id="bf-log"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
