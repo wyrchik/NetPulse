@@ -12,7 +12,7 @@ NetPulse is a powerful network analysis tool featuring a modern Graphical User I
 
     Flask-Powered Backend: A robust architecture where web technologies handle the logic, seamlessly integrated into a native system window.
 <img width="1194" height="804" alt="зображення" src="https://github.com/user-attachments/assets/88ef5470-84b5-4f55-b6b9-8f65e70f46f0" />
-
+If you like this tool, please give it a ⭐
 🐧 Why Linux Only?
 
 NetPulse is highly optimized for GTK and Qt environments, which are standard across Linux distributions. By focusing exclusively on Linux, the project eliminates common Windows-specific issues such as broken DLL dependencies and false-positive antivirus flags, prioritizing security and raw performance.
@@ -31,3 +31,5 @@ NetPulse is highly optimized for GTK and Qt environments, which are standard acr
     Bash
 
     ./NetPulse-linux
+
+
