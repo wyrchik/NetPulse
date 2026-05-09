@@ -11,7 +11,6 @@ def build():
         "--onefile",
         "--windowed", 
         "--name", "NetPulse",
-        f"--add-data=web{separator}web",
         "main.py"
     ]
     

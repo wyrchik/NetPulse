@@ -31,20 +31,15 @@ jobs:
     - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pyinstaller flask asyncssh
+        pip install pyinstaller PyQt6 PyQt6-WebEngine asyncssh qtpy
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Build with PyInstaller
       shell: bash
       run: |
-        if [ "$RUNNER_OS" == "Windows" ]; then
-          SEP=";"
-        else
-          SEP=":"
-        fi
         pyinstaller --onefile \
+          --windowed \
           --name ${{ matrix.artifact_name }} \
-          --add-data "web${SEP}web" \
           --clean main.py
 
     - name: Upload Artifacts
