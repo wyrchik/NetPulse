@@ -28,18 +28,26 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install dependencies
+    - name: Install System Dependencies (Linux)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          libgtk-3-dev \
+          libgirepository1.0-dev \
+          libcairo2-dev \
+          pkg-config \
+          gir1.2-gtk-3.0 \
+          gir1.2-webkit2-4.0 \
+          python3-gi \
+          python3-gi-cairo
+
+    - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
-        # Встановлюємо все необхідне для GUI
-        pip install pyinstaller pywebview PyQt6 PyQt6-WebEngine flask fastapi uvicorn asyncssh qtpy
-        
-        # Спеціальні бібліотеки для Linux, щоб працювало вікно (GTK/GObject)
-        if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
-          sudo apt-get update
-          sudo apt-get install -y libgtk-3-dev libgirepository1.0-dev pkg-config python3-gi python3-gi-cairo gir1.2-gtk-3.0
-          pip install PyGObject
-        fi
+        # Встановлюємо всі бібліотеки, включаючи qtpy та PyGObject
+        pip install pyinstaller pywebview PyQt6 PyQt6-WebEngine flask fastapi uvicorn asyncssh qtpy PyGObject
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Build with PyInstaller
       shell: bash
@@ -48,7 +56,6 @@ jobs:
           --name ${{ matrix.artifact_name }} \
           --collect-all pywebview \
           --collect-all PyQt6 \
-          --collect-all asyncssh \
           --hidden-import gi \
           --hidden-import qtpy \
           --hidden-import PyQt6.QtWebEngineCore \
