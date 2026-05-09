@@ -1,24 +1,22 @@
-This is free and unencumbered software released into the public domain.
+Copyright (c) 2026 wyrchik. All rights reserved.
 
-Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled
-binary, for any purpose, commercial or non-commercial, and by any
-means.
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 
-In jurisdictions that recognize copyright laws, the author or authors
-of this software dedicate any and all copyright interest in the
-software to the public domain. We make this dedication for the benefit
-of the public at large and to the detriment of our heirs and
-successors. We intend this dedication to be an overt act of
-relinquishment in perpetuity of all present and future rights to this
-software under copyright law.
+1. Proprietary Rights
+This software and all associated documentation ("NetPulse") are the exclusive property of the author (wyrchik). All rights, including copyright, trademarks, and intellectual property rights, are strictly reserved.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+2. Usage Restrictions
+Permission is granted to download and execute the provided binary files for personal, non-commercial use only. 
 
-For more information, please refer to <https://unlicense.org>
+3. Prohibited Actions
+You are strictly prohibited from:
+- Copying, modifying, or creating derivative works of the source code.
+- Redistributing the source code or binary files without explicit written permission from the author.
+- Using this software for any commercial purposes.
+- Decompiling, reverse engineering, or attempting to extract the source code from the binary files.
+
+4. No Warranty
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY.
+
+5. Unauthorized Distribution
+Any unauthorized distribution or "stealing" of this code will be subject to a DMCA takedown request and potential legal action.
