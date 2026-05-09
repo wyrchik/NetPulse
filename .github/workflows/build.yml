@@ -28,37 +28,23 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install System Dependencies (Linux)
-      if: matrix.os == 'ubuntu-latest'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y \
-          libgtk-3-dev \
-          libgirepository1.0-dev \
-          libcairo2-dev \
-          pkg-config \
-          gir1.2-gtk-3.0 \
-          gir1.2-webkit2-4.0 \
-          python3-gi \
-          python3-gi-cairo
-
     - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
-        # Встановлюємо всі бібліотеки, включаючи qtpy та PyGObject
-        pip install pyinstaller pywebview PyQt6 PyQt6-WebEngine flask fastapi uvicorn asyncssh qtpy PyGObject
+        pip install pyinstaller flask asyncssh
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Build with PyInstaller
       shell: bash
       run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          SEP=";"
+        else
+          SEP=":"
+        fi
         pyinstaller --onefile \
           --name ${{ matrix.artifact_name }} \
-          --collect-all pywebview \
-          --collect-all PyQt6 \
-          --hidden-import gi \
-          --hidden-import qtpy \
-          --hidden-import PyQt6.QtWebEngineCore \
+          --add-data "web${SEP}web" \
           --clean main.py
 
     - name: Upload Artifacts
