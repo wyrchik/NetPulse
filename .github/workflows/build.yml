@@ -9,6 +9,7 @@ jobs:
     name: Build for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false  # Щоб Linux не падав, якщо Windows помилився
       matrix:
         include:
           - os: ubuntu-latest
@@ -17,26 +18,31 @@ jobs:
             artifact_name: NetPulse-windows.exe
 
     steps:
-    - uses: actions/checkout@v4  # Оновлено до v4
+    - uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v5  # Оновлено до v5
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         pip install pyinstaller
+        # Встановлюємо залежності, тільки якщо файл існує
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        # Додаємо бібліотеки, які точно потрібні для твого GUI
+        pip install flask fastapi uvicorn 
 
     - name: Build with PyInstaller
       shell: bash
       run: |
-        pyinstaller --onefile --name ${{ matrix.artifact_name }} main.py
+        # Перевіряємо, чи файл точно називається main.py
+        # Якщо твій головний файл називається інакше (наприклад, app.py), зміни назву тут
+        pyinstaller --onefile --name ${{ matrix.artifact_name }} --clean main.py
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v4  # Оновлено до v4 (це виправить помилку!)
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.artifact_name }}
         path: dist/${{ matrix.artifact_name }}*
