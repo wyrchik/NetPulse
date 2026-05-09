@@ -11,6 +11,7 @@ NetPulse is a powerful network analysis tool featuring a modern Graphical User I
     Network Intelligence: High-speed device discovery, port scanning, and SSH access verification utilizing asyncssh.
 
     Flask-Powered Backend: A robust architecture where web technologies handle the logic, seamlessly integrated into a native system window.
+<img width="1194" height="804" alt="зображення" src="https://github.com/user-attachments/assets/88ef5470-84b5-4f55-b6b9-8f65e70f46f0" />
 
 🐧 Why Linux Only?
 
