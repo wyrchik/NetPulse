@@ -1,30 +1,32 @@
-# NetPulse
+Here is the updated, professional description for your GitHub repository in English. You can use this for your README.md file and the project "About" section.
+🌐 NetPulse: Advanced Network Scanner for Linux
 
-**NetPulse** is a lightning-fast, professional-grade network auditing and discovery tool. Built for speed and accuracy, it leverages asynchronous real-time streaming to sweep networks, detect operating systems, and identify open ports in seconds.
+NetPulse is a powerful network analysis tool featuring a modern Graphical User Interface (GUI). Engineered specifically for Linux distributions (Ubuntu, Arch, Mint, and more), it ensures maximum performance and stability by leveraging native system libraries.
+🚀 Key Features:
 
-![NetPulse Interface](screenshot_placeholder.png) *(You can replace this with your actual photo)*
+    Standalone Executable: Compiled into a single binary file that runs without requiring a Python installation or external dependencies.
 
-## Key Features
-- **Real-Time Discovery:** IPs appear on your screen instantly the millisecond they respond. No waiting for chunks to finish.
-- **OS Fingerprinting:** Automatically guesses the operating system (Windows, Linux, Router) based on network TTL logic.
-- **Banner Grabbing:** Actively probes open web ports (80, 443) to retrieve server banners (e.g., Apache, Nginx).
-- **Latency Monitoring:** Color-coded ping latency visualization.
-- **Hardware Identification:** Resolves MAC addresses to their physical manufacturers.
-- **Glassmorphism UI:** A stunning, premium dark-mode interface with smooth animations.
+    Modern GUI: Powered by pywebview and PyQt6, providing a sleek windowed experience instead of a traditional command-line interface.
 
-## Getting Started
+    Network Intelligence: High-speed device discovery, port scanning, and SSH access verification utilizing asyncssh.
 
-You **do not** need to install Python, Node.js, or any other complex dependencies. NetPulse is compiled as a standalone portable executable.
+    Flask-Powered Backend: A robust architecture where web technologies handle the logic, seamlessly integrated into a native system window.
 
-1. Download the latest `NetPulse.exe` file.
-2. Double-click `NetPulse.exe` to start the engine.
-3. Your default web browser will automatically open the NetPulse Dashboard (typically at `http://127.0.0.1:5000`).
+🐧 Why Linux Only?
 
-## Usage Guide
-- The tool automatically detects your local network subnet and pre-fills the IP range.
-- Adjust the **Intensity** slider to control how many simultaneous connections are made (higher = faster, but may drop packets on weak routers).
-- Enter specific **Ports** (comma-separated, e.g. `22,80,443`) to check during the sweep.
-- Use the **Export (CSV)** button to save a detailed `.txt` log of your findings for further analysis.
+NetPulse is highly optimized for GTK and Qt environments, which are standard across Linux distributions. By focusing exclusively on Linux, the project eliminates common Windows-specific issues such as broken DLL dependencies and false-positive antivirus flags, prioritizing security and raw performance.
+📦 Quick Start:
 
----
-*Created by Wyrchik*
+    Download the NetPulse-linux file from the Releases or Actions tab.
+
+    Open your terminal in the directory where the file is located.
+
+    Grant execution permissions:
+    Bash
+
+    chmod +x NetPulse-linux
+
+    Launch the application:
+    Bash
+
+    ./NetPulse-linux
