@@ -41,6 +41,9 @@ jobs:
         pyinstaller --onefile \
           --windowed \
           --name ${{ matrix.artifact_name }} \
+          --collect-all PyQt6 \
+          --hidden-import gui.main_window \
+          --hidden-import gui.worker \
           --clean main.py
 
     - name: Upload Artifacts
